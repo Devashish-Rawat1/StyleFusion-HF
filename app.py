@@ -361,16 +361,9 @@ footer { display: none !important; }
 
 # ─── EXAMPLE PAIRS ────────────────────────────────────────────────────────────
 examples = [
-    ["assets/content_image1.jpg", "assets/style_image1.png", 1.0, "assets/generated_image1.jpg"],
-    ["assets/content_image1.jpg", "assets/style_image2.jpg", 1.0, "assets/generated_image2.jpg"],
+    ["assets/content_image1.jpg", "assets/style_image1.png", 1.0],
+    ["assets/content_image1.jpg", "assets/style_image2.jpg", 1.0],
 ]
-
-def load_example(content, style, alpha, generated):
-    """Returns pre-generated output instantly without running the model."""
-    generated_img = Image.open(generated).convert("RGB")
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-    generated_img.save(temp_file.name)
-    return generated_img, temp_file.name
 
 # ─── UI ───────────────────────────────────────────────────────────────────────
 with gr.Blocks(title="StyleFusion AI") as demo:
@@ -447,13 +440,12 @@ with gr.Blocks(title="StyleFusion AI") as demo:
 
     # ── EXAMPLES ──────────────────────────────────────────────────────────────
     gr.HTML('<p class="examples-header">✦ Try a Preset Pair</p>')
-    example_generated = gr.Image(visible=False)   # hidden carrier for pre-generated path
     gr.Examples(
         examples=examples,
-        inputs=[content, style, alpha, example_generated],
+        inputs=[content, style, alpha],
         outputs=[output, download],
-        fn=load_example,
-        cache_examples=True,
+        fn=stylize,
+        cache_examples=False,
         label="",
         examples_per_page=4,
     )
