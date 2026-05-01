@@ -393,14 +393,14 @@ with gr.Blocks(title="StyleFusion AI") as demo:
         with gr.Column(elem_classes="image-panel"):
             content = gr.Image(
                 type="pil",
-                label="📷  Content Image",
+                label="Content Image",
                 show_label=True,
                 height=320,
             )
         with gr.Column(elem_classes="image-panel"):
             style = gr.Image(
                 type="pil",
-                label="🎨  Style Image",
+                label="Style Image",
                 show_label=True,
                 height=320,
             )
@@ -419,7 +419,7 @@ with gr.Blocks(title="StyleFusion AI") as demo:
         )
 
     gr.HTML('<div style="height:16px"></div>')
-    btn = gr.Button("✨  Generate Stylized Image", elem_classes="gen-btn", variant="primary")
+    btn = gr.Button(" Generate Stylized Image", elem_classes="gen-btn", variant="primary")
 
     # ── OUTPUT SECTION ────────────────────────────────────────────────────────
     gr.HTML('<p class="section-label" style="margin-top:32px">03 — Results</p>')
