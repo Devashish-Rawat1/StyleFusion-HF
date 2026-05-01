@@ -140,6 +140,9 @@ footer { display: none !important; }
     max-width: 560px;
     margin: 0 auto 10px;
     line-height: 1.7;
+    align-items: center;
+    display: flex;
+    gap: 10px;
 }
 
 /* ── STAT CHIPS ── */
