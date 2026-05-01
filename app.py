@@ -137,7 +137,8 @@ footer { display: none !important; }
 .hero-sub {
     color: #94a3b8;
     font-size: 1.05rem;
-    max-width: 560px;
+    max-width: 660px;
+    margin-left: 20px;
     margin: 0 auto 10px;
     line-height: 1.7;
     align-items: center;
