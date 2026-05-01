@@ -25,6 +25,32 @@ StyleFusion implements the AdaIN architecture introduced by Huang and Belongie (
 
 ---
 
+## Repository Structure
+
+```
+StyleFusion/                    # Core model and application code
+│── app.py                      # Flask application entry point
+│──utils/                       
+│     ├── models.py             # VGGEncoder and Decoder architecture
+│     └── utils.py              # AdaIN operation, transforms
+├── templates/
+│     └── index.html            # Jinja2 frontend template
+├── assets/
+|     ├── content_image1.jpg
+|     ├── style_image1.jpg
+|     └── style_image2.jpg
+├── weights/
+|     ├── decoder_final.pth     # model parameters after training
+|     └── vgg_normalised        # pre-trained endoer
+|
+├── Research Papers Summary/    # Summaries of key NST research papers
+|
+├── requirements.txt            # Python dependencies
+└── .gitignore
+```
+
+---
+
 ## Features
 - Upload content + style images
 - Adjustable style strength (alpha slider)
@@ -48,6 +74,9 @@ AdaIN(x, y) = sigma(y) * ((x - mu(x)) / sigma(x)) + mu(y)
 **Decoder** — A mirror of the encoder (without pooling layers), trained from scratch to invert the AdaIN-transformed feature maps back into pixel space.
 
 **Loss** — Content loss is computed as MSE between the decoded output features and the AdaIN target at `relu4_1`. Style loss is computed as MSE between the channel-wise means and standard deviations of the output and style features across all four VGG relu layers.
+
+![AdaIN Style Transfer Architecture](adain_algo.png)
+*Figure: An overview of the style transfer algorithm. A fixed VGG-19 encoder encodes both content and style images. The AdaIN layer aligns feature statistics in latent space. A learned decoder inverts the result back to pixel space. The same VGG encoder is reused to compute content loss (𝓛c) and style loss (𝓛s).*
 
 ---
 
