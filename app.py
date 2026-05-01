@@ -360,9 +360,10 @@ footer { display: none !important; }
 """
 
 # ─── EXAMPLE PAIRS ────────────────────────────────────────────────────────────
+# Format: [content_image, style_image, alpha, cached_output_image]
 examples = [
-    ["assets/content1.jpg", "assets/style1.jpg", 1.0],
-    ["assets/content2.jpg", "assets/style2.jpg", 0.8],
+    ["assets/content_image1.jpg", "assets/style_image1.jpg", 1.0, "assets/generated_image1.png"],
+    ["assets/content_image1.jpg", "assets/style_image2.jpg", 1.0, "assets/generated_image2.png"],
 ]
 
 # ─── UI ───────────────────────────────────────────────────────────────────────
@@ -443,6 +444,9 @@ with gr.Blocks(theme=theme, css=css, title="StyleFusion AI") as demo:
     gr.Examples(
         examples=examples,
         inputs=[content, style, alpha],
+        outputs=[output, download],
+        fn=stylize,
+        cache_examples=True,
         label="",
         examples_per_page=4,
     )
@@ -502,7 +506,7 @@ with gr.Blocks(theme=theme, css=css, title="StyleFusion AI") as demo:
     # ── FOOTER ────────────────────────────────────────────────────────────────
     gr.HTML("""
     <div class="site-footer">
-      Built with ❤️ using PyTorch + Gradio &nbsp;·&nbsp;
+      Built with PyTorch + Gradio &nbsp;·&nbsp;
       Paper: <a href="https://arxiv.org/abs/1703.06868" target="_blank">Huang & Belongie 2017</a> &nbsp;·&nbsp;
       <a href="https://huggingface.co" target="_blank">HuggingFace Spaces</a>
     </div>
