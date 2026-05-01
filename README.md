@@ -1,3 +1,13 @@
+---
+title: StyleFusion
+emoji: 🎨
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+app_file: app.py
+pinned: false
+---
+
 # StyleFusion AI
 A Neural Style Transfer application using AdaIN.
 
