@@ -360,14 +360,13 @@ footer { display: none !important; }
 """
 
 # ─── EXAMPLE PAIRS ────────────────────────────────────────────────────────────
-# Format: [content_image, style_image, alpha, cached_output_image]
 examples = [
-    ["assets/content_image1.jpg", "assets/style_image1.jpg", 1.0, "assets/generated_image1.png"],
-    ["assets/content_image1.jpg", "assets/style_image2.jpg", 1.0, "assets/generated_image2.png"],
+    ["assets/content_image1.jpg", "assets/style_image1.jpg", 1.0],
+    ["assets/content_image1.jpg", "assets/style_image2.jpg", 1.0],
 ]
 
 # ─── UI ───────────────────────────────────────────────────────────────────────
-with gr.Blocks(theme=theme, css=css, title="StyleFusion AI") as demo:
+with gr.Blocks(title="StyleFusion AI") as demo:
 
     # ── HERO ──────────────────────────────────────────────────────────────────
     gr.HTML("""
@@ -446,7 +445,7 @@ with gr.Blocks(theme=theme, css=css, title="StyleFusion AI") as demo:
         inputs=[content, style, alpha],
         outputs=[output, download],
         fn=stylize,
-        cache_examples=True,
+        cache_examples="lazy",
         label="",
         examples_per_page=4,
     )
@@ -523,4 +522,4 @@ with gr.Blocks(theme=theme, css=css, title="StyleFusion AI") as demo:
         outputs=compare,
     )
 
-demo.launch()
+demo.launch(theme=theme, css=css)
