@@ -445,7 +445,7 @@ with gr.Blocks(title="StyleFusion AI") as demo:
         inputs=[content, style, alpha],
         outputs=[output, download],
         fn=stylize,
-        cache_examples="lazy",
+        cache_examples=False,
         label="",
         examples_per_page=4,
     )
