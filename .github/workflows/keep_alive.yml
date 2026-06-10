@@ -1,0 +1,30 @@
+name: Keep HuggingFace Space Alive
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours — HF sleeps after 48h, this is plenty
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping HuggingFace Space
+        run: |
+          python3 -c "
+          import urllib.request
+          import sys
+
+          url = 'https://huggingface.co/spaces/Drazan/StyleFusion-HF'
+
+          print('Pinging HuggingFace Space...')
+          try:
+              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req, timeout=60) as response:
+                  print('Status:', response.status)
+                  print('Space is awake!')
+          except Exception as e:
+              print('Error:', e)
+              sys.exit(1)
+          "
